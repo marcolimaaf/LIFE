@@ -210,6 +210,32 @@ nav{
 }
 .final-cta .section-head{max-width:450px;margin:0 auto .6rem}
 
+/* ── FORM ── */
+.waitlist-form{max-width:420px;margin:0 auto;display:flex;flex-direction:column;gap:.8rem}
+.waitlist-form input{
+  width:100%;padding:.75rem 1rem;
+  background:var(--space-mid);border:1px solid var(--border);
+  color:var(--warm);font-family:'Inter',sans-serif;font-size:.85rem;
+  outline:none;transition:border-color .3s;
+}
+.waitlist-form input::placeholder{color:var(--slate)}
+.waitlist-form input:focus{border-color:var(--teal)}
+.waitlist-form button{
+  padding:.85rem 2rem;
+  background:var(--teal);color:var(--space);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.82rem;font-weight:600;letter-spacing:.04em;
+  border:none;cursor:pointer;transition:background .3s;
+}
+.waitlist-form button:hover{background:#00E8BB}
+.form-success{
+  text-align:center;padding:2rem;
+  border:1px solid rgba(0,212,170,.2);
+  background:rgba(0,212,170,.05);
+}
+.form-success h3{font-size:1.1rem;color:var(--teal);margin-bottom:.5rem}
+.form-success p{font-size:.85rem;color:var(--slate)}
+
 /* ── FOOTER ── */
 footer{
   text-align:center;
@@ -218,6 +244,33 @@ footer{
   letter-spacing:.04em;
   border-top:1px solid var(--border);
 }
+footer a{color:var(--slate);text-decoration:none;transition:color .3s}
+footer a:hover{color:var(--teal)}
+.footer-legal{margin-top:.6rem}
+.footer-legal a{margin:0 .6rem}
+
+/* ── MODAL ── */
+.modal-overlay{
+  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,.8);z-index:200;
+  justify-content:center;align-items:center;padding:1.5rem;
+}
+.modal-overlay.active{display:flex}
+.modal-box{
+  background:var(--space-mid);border:1px solid var(--border);
+  max-width:640px;width:100%;max-height:80vh;overflow-y:auto;
+  padding:2.5rem;position:relative;
+}
+.modal-box h2{font-size:1.2rem;font-weight:600;color:var(--teal);margin-bottom:1rem}
+.modal-box h3{font-size:.92rem;font-weight:600;margin:1.2rem 0 .4rem;color:var(--warm)}
+.modal-box p,.modal-box li{font-size:.82rem;color:var(--slate);line-height:1.8}
+.modal-box ul{list-style:disc;padding-left:1.2rem;margin:.4rem 0}
+.modal-close{
+  position:absolute;top:1rem;right:1.2rem;
+  background:none;border:none;color:var(--slate);
+  font-size:1.4rem;cursor:pointer;transition:color .3s;
+}
+.modal-close:hover{color:var(--teal)}
 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
@@ -321,12 +374,107 @@ footer{
   <div class="reveal">
     <h2 class="section-head">Pronto para tratar sua vida como o maior projeto que você tem?</h2>
     <p class="section-sub center">Estamos selecionando os primeiros usuários do LIFE. Deixe seu contato.</p>
-    <a href="mailto:contato@lifeprogressos.com" class="btn-primary">Entrar na lista</a>
+    <form id="life-form" class="waitlist-form" action="https://formsubmit.co/marcolimaaf@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="LIFE — Novo interessado no acesso antecipado">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://marcolimaaf.github.io/LIFE/?enviado=1">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="nome" placeholder="Seu nome" required>
+      <input type="email" name="email" placeholder="Seu melhor e-mail" required>
+      <button type="submit">Entrar na lista</button>
+    </form>
   </div>
 </section>
 
+<!-- TERMOS DE USO -->
+<div class="modal-overlay" id="modal-termos">
+  <div class="modal-box">
+    <button class="modal-close" onclick="fecharModal('modal-termos')">&times;</button>
+    <h2>Termos de Uso</h2>
+    <p><em>Última atualização: novembro de 2026</em></p>
+
+    <h3>1. Aceitação</h3>
+    <p>Ao acessar o site LIFE ("Plataforma"), você concorda com estes Termos de Uso. Se não concordar, interrompa o uso imediatamente.</p>
+
+    <h3>2. Descrição do Serviço</h3>
+    <p>O LIFE é um sistema operacional de desenvolvimento pessoal em fase de pré-lançamento. Atualmente, a Plataforma oferece apenas a coleta de manifestações de interesse para acesso antecipado. Nenhuma funcionalidade do aplicativo está disponível neste momento.</p>
+
+    <h3>3. Cadastro na Lista de Espera</h3>
+    <p>O preenchimento do formulário de interesse não garante acesso ao produto final. Os dados coletados serão utilizados exclusivamente para comunicação sobre o lançamento do LIFE.</p>
+
+    <h3>4. Propriedade Intelectual</h3>
+    <p>Todo o conteúdo da Plataforma — incluindo textos, design, marca, conceitos e código — é de titularidade exclusiva do LIFE e protegido pela legislação brasileira de propriedade intelectual.</p>
+
+    <h3>5. Isenção de Responsabilidade</h3>
+    <p>O LIFE não substitui acompanhamento profissional de saúde, psicologia, nutrição ou qualquer outra área. As informações e funcionalidades futuras têm caráter informativo e de organização pessoal.</p>
+
+    <h3>6. Limitação de Responsabilidade</h3>
+    <p>O LIFE não se responsabiliza por decisões tomadas com base em informações da Plataforma, nem por indisponibilidades temporárias do serviço.</p>
+
+    <h3>7. Alterações</h3>
+    <p>Estes termos podem ser atualizados a qualquer momento. O uso continuado após alterações constitui aceitação.</p>
+
+    <h3>8. Foro</h3>
+    <p>Fica eleito o foro da comarca de Salvador, Bahia, para dirimir quaisquer questões.</p>
+
+    <h3>9. Contato</h3>
+    <p>E-mail: contato@lifeprogressos.com</p>
+  </div>
+</div>
+
+<!-- POLÍTICA DE PRIVACIDADE -->
+<div class="modal-overlay" id="modal-privacidade">
+  <div class="modal-box">
+    <button class="modal-close" onclick="fecharModal('modal-privacidade')">&times;</button>
+    <h2>Política de Privacidade</h2>
+    <p><em>Última atualização: novembro de 2026</em></p>
+
+    <h3>1. Introdução</h3>
+    <p>Esta Política de Privacidade descreve como o LIFE ("nós") coleta, utiliza e protege os dados pessoais fornecidos por você ("usuário"), em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD).</p>
+
+    <h3>2. Dados Coletados</h3>
+    <p>No momento, coletamos apenas:</p>
+    <ul>
+      <li>Nome</li>
+      <li>Endereço de e-mail</li>
+    </ul>
+    <p>Esses dados são coletados por meio do formulário de interesse na Plataforma.</p>
+
+    <h3>3. Finalidade</h3>
+    <p>Os dados coletados são utilizados exclusivamente para:</p>
+    <ul>
+      <li>Comunicação sobre o lançamento e atualizações do LIFE</li>
+      <li>Envio de convite para acesso antecipado</li>
+    </ul>
+
+    <h3>4. Base Legal</h3>
+    <p>O tratamento dos dados tem como base legal o consentimento do titular (art. 7º, I, da LGPD), manifestado ao preencher voluntariamente o formulário.</p>
+
+    <h3>5. Armazenamento e Segurança</h3>
+    <p>Os dados são recebidos por e-mail via serviço de formulário (FormSubmit) e armazenados de forma privada. Não compartilhamos, vendemos ou transferimos seus dados a terceiros.</p>
+
+    <h3>6. Seus Direitos</h3>
+    <p>Conforme a LGPD, você pode a qualquer momento:</p>
+    <ul>
+      <li>Solicitar acesso aos seus dados</li>
+      <li>Solicitar correção de dados incompletos ou inexatos</li>
+      <li>Solicitar a exclusão dos seus dados</li>
+      <li>Revogar o consentimento</li>
+    </ul>
+    <p>Para exercer seus direitos, entre em contato pelo e-mail abaixo.</p>
+
+    <h3>7. Contato do Encarregado</h3>
+    <p>E-mail: contato@lifeprogressos.com</p>
+  </div>
+</div>
+
 <footer>
   <p>LIFE — O Sistema Operacional da Sua Vida</p>
+  <div class="footer-legal">
+    <a href="#" onclick="abrirModal('modal-termos');return false">Termos de Uso</a>
+    <a href="#" onclick="abrirModal('modal-privacidade');return false">Política de Privacidade</a>
+  </div>
+  <p style="margin-top:.5rem">contato@lifeprogressos.com</p>
 </footer>
 
 <script>
@@ -336,6 +484,21 @@ const obs = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Success message after form submission
+if (window.location.search.includes('enviado=1')) {
+  const form = document.getElementById('life-form');
+  if (form) {
+    form.outerHTML = '<div class="form-success"><h3>🧬 Você está na lista!</h3><p>Vamos te avisar assim que o LIFE estiver pronto para os primeiros usuários.</p></div>';
+  }
+}
+
+// Modal functions
+function abrirModal(id) { document.getElementById(id).classList.add('active'); }
+function fecharModal(id) { document.getElementById(id).classList.remove('active'); }
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); });
+});
 </script>
 </body>
 </html>
