@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIFE — O Sistema Operacional da Sua Vida</title>
+<meta name="description" content="LIFE — o sistema operacional de desenvolvimento pessoal. Life Map, hábitos, gamificação com XP, integração com Garmin e WHOOP. Sua vida é o projeto.">
+<meta name="theme-color" content="#0C0F1A">
+<meta property="og:title" content="LIFE — O Sistema Operacional da Sua Vida">
+<meta property="og:description" content="Life Map, hábitos, rotinas e gamificação. O OS de quem trata a própria vida como o projeto mais importante.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧬</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --space:#0C0F1A;
+  --space-mid:#141828;
+  --teal:#00D4AA;
+  --teal-dim:rgba(0,212,170,.12);
+  --violet:#7B61FF;
+  --violet-dim:rgba(123,97,255,.1);
+  --warm:#F8F6F3;
+  --slate:#6B7A8D;
+  --border:rgba(0,212,170,.08);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--space);color:var(--warm);
+  font-family:'Inter',system-ui,sans-serif;
+  font-weight:300;line-height:1.75;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.nav-logo,.xp-label{font-family:'Space Grotesk',sans-serif}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem clamp(1.5rem,5vw,4rem);
+  background:rgba(12,15,26,.9);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-size:1.1rem;font-weight:600;letter-spacing:.15em;color:var(--teal)}
+.nav-cta{
+  font-size:.78rem;font-weight:500;color:var(--teal);
+  letter-spacing:.06em;text-decoration:none;
+  padding:.45rem 1.2rem;border:1px solid rgba(0,212,170,.3);
+  transition:all .3s;
+}
+.nav-cta:hover{background:var(--teal);color:var(--space)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(7rem,15vh,10rem) clamp(1.5rem,5vw,4rem) 4rem;
+  max-width:1000px;margin:0 auto;
+  text-align:center;
+}
+.hero-badge{
+  display:inline-block;
+  font-size:.7rem;font-weight:500;letter-spacing:.12em;
+  color:var(--teal);
+  padding:.35rem 1rem;
+  border:1px solid rgba(0,212,170,.2);
+  border-radius:20px;
+  margin-bottom:2rem;
+}
+.hero h1{
+  font-size:clamp(2.2rem,5vw,3.8rem);
+  font-weight:600;line-height:1.15;
+  margin-bottom:1.2rem;
+}
+.hero h1 em{font-style:normal;color:var(--teal)}
+.hero-desc{
+  font-size:clamp(.92rem,1.1vw,1rem);
+  color:var(--slate);max-width:520px;
+  margin:0 auto 2.5rem;line-height:1.9;
+}
+
+/* XP BAR */
+.xp-bar-wrap{
+  max-width:400px;margin:0 auto 2.5rem;
+  text-align:left;
+}
+.xp-label{
+  font-size:.7rem;font-weight:500;
+  letter-spacing:.1em;color:var(--slate);
+  margin-bottom:.4rem;
+  display:flex;justify-content:space-between;
+}
+.xp-bar{
+  height:6px;border-radius:3px;
+  background:rgba(0,212,170,.1);
+  overflow:hidden;
+}
+.xp-fill{
+  height:100%;width:0;
+  background:linear-gradient(90deg,var(--teal),var(--violet));
+  border-radius:3px;
+  animation:fillXP 2s ease 1s forwards;
+}
+@keyframes fillXP{to{width:68%}}
+
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{
+  display:inline-block;padding:.85rem 2rem;
+  background:var(--teal);color:var(--space);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.82rem;font-weight:600;
+  letter-spacing:.04em;text-decoration:none;
+  transition:all .3s;
+}
+.btn-primary:hover{background:#00E8BB}
+.btn-ghost{
+  display:inline-block;padding:.85rem 2rem;
+  border:1px solid rgba(0,212,170,.2);
+  color:var(--slate);font-size:.82rem;
+  letter-spacing:.04em;text-decoration:none;
+  transition:all .3s;
+}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+
+/* ── SECTIONS ── */
+.section{
+  padding:clamp(4rem,10vw,7rem) clamp(1.5rem,5vw,4rem);
+  max-width:1000px;margin:0 auto;
+}
+.section-head{
+  font-size:clamp(1.5rem,3vw,2.2rem);
+  font-weight:600;line-height:1.25;
+  margin-bottom:.6rem;
+}
+.section-sub{
+  font-size:.92rem;color:var(--slate);
+  max-width:480px;margin-bottom:3rem;
+}
+.section-sub.center{margin-left:auto;margin-right:auto;text-align:center}
+
+/* ── FEATURES ── */
+.features{border-top:1px solid var(--border)}
+.feat-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+}
+.feat{background:var(--space);padding:2rem}
+.feat-icon{
+  width:36px;height:36px;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1rem;font-size:1.1rem;
+}
+.feat-icon.teal{background:var(--teal-dim);color:var(--teal)}
+.feat-icon.violet{background:var(--violet-dim);color:var(--violet)}
+.feat h3{
+  font-size:.92rem;font-weight:600;
+  margin-bottom:.4rem;
+}
+.feat p{font-size:.82rem;color:var(--slate);line-height:1.8}
+
+/* ── PHILOSOPHY ── */
+.philosophy{
+  border-top:1px solid var(--border);
+  text-align:center;
+}
+.philosophy blockquote{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(1.2rem,2.5vw,1.8rem);
+  font-weight:300;line-height:1.5;
+  color:var(--warm);
+  max-width:600px;margin:0 auto 1rem;
+  font-style:italic;
+}
+.philosophy cite{
+  font-size:.78rem;color:var(--slate);
+  font-style:normal;letter-spacing:.05em;
+}
+
+/* ── INTEGRATIONS ── */
+.integrations{border-top:1px solid var(--border)}
+.int-row{
+  display:flex;gap:2rem;flex-wrap:wrap;
+  justify-content:center;
+}
+.int-chip{
+  padding:.6rem 1.4rem;
+  border:1px solid var(--border);
+  font-size:.78rem;color:var(--slate);
+  letter-spacing:.04em;
+  transition:border-color .3s;
+}
+.int-chip:hover{border-color:rgba(0,212,170,.3);color:var(--teal)}
+
+/* ── CTA ── */
+.final-cta{
+  text-align:center;
+  border-top:1px solid var(--border);
+  padding-top:clamp(5rem,12vw,8rem);
+  padding-bottom:clamp(5rem,12vw,8rem);
+}
+.final-cta .section-head{max-width:450px;margin:0 auto .6rem}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center;
+  padding:2rem 1.5rem 3rem;
+  font-size:.68rem;color:var(--slate);
+  letter-spacing:.04em;
+  border-top:1px solid var(--border);
+}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:600px){
+  .hero h1{font-size:2rem}
+  .nav-cta{display:none}
+  .feat-grid{grid-template-columns:1fr}
+  .int-row{gap:1rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .xp-fill{animation:none;width:68%}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">LIFE</div>
+  <a href="#acesso" class="nav-cta">Acesso antecipado</a>
+</nav>
+
+<section class="hero">
+  <span class="hero-badge">LIFE PROGRESS OS</span>
+  <h1>Sua vida é o projeto.<br><em>Trate como tal.</em></h1>
+  <p class="hero-desc">O LIFE é o sistema operacional de desenvolvimento pessoal. Life Map, hábitos, rotinas, gamificação com XP — tudo num só lugar. Porque progresso de verdade se mede, se visualiza e se sente.</p>
+  <div class="xp-bar-wrap">
+    <div class="xp-label"><span>NÍVEL DE VIDA</span><span>68 / 100 XP</span></div>
+    <div class="xp-bar"><div class="xp-fill"></div></div>
+  </div>
+  <div class="hero-actions">
+    <a href="#acesso" class="btn-primary">Quero participar</a>
+    <a href="#features" class="btn-ghost">Como funciona</a>
+  </div>
+</section>
+
+<section class="section features" id="features">
+  <div class="reveal">
+    <h2 class="section-head">Cada área da vida, um sistema.</h2>
+    <p class="section-sub">Não é um app de hábitos. É a infraestrutura completa para quem leva evolução pessoal a sério.</p>
+  </div>
+  <div class="feat-grid">
+    <div class="feat reveal">
+      <div class="feat-icon teal">◎</div>
+      <h3>Life Map</h3>
+      <p>Visualize todas as áreas da sua vida num mapa interativo. Saúde, carreira, finanças, relações — cada uma com score e metas claras.</p>
+    </div>
+    <div class="feat reveal">
+      <div class="feat-icon violet">△</div>
+      <h3>Hábitos &amp; Rotinas</h3>
+      <p>Construa rotinas matinais e noturnas. Streaks, lembretes inteligentes e a satisfação de ver cada dia concluído.</p>
+    </div>
+    <div class="feat reveal">
+      <div class="feat-icon teal">⬡</div>
+      <h3>XP &amp; Gamificação</h3>
+      <p>Cada hábito cumprido, cada meta alcançada gera XP. Suba de nível, desbloqueie conquistas e veja seu progresso real ao longo dos meses.</p>
+    </div>
+    <div class="feat reveal">
+      <div class="feat-icon violet">◈</div>
+      <h3>Journaling</h3>
+      <p>Registre reflexões diárias. O LIFE identifica padrões no seu humor, energia e produtividade com o tempo.</p>
+    </div>
+    <div class="feat reveal">
+      <div class="feat-icon teal">⟡</div>
+      <h3>Metas &amp; Milestones</h3>
+      <p>Defina metas trimestrais e anuais. Quebre em milestones semanais. O sistema cobra, celebra e ajusta.</p>
+    </div>
+    <div class="feat reveal">
+      <div class="feat-icon violet">⊕</div>
+      <h3>Integrações</h3>
+      <p>Conecte Garmin, WHOOP, Apple Health. Seus dados de sono, treino e recuperação alimentam o Life Map automaticamente.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section philosophy">
+  <div class="reveal">
+    <blockquote>"A maioria das pessoas superestima o que pode fazer em um ano e subestima o que pode fazer em dez."</blockquote>
+    <cite>— Bill Gates</cite>
+  </div>
+</section>
+
+<section class="section integrations">
+  <div class="reveal">
+    <h2 class="section-head" style="text-align:center">Conecte seus dados.</h2>
+    <p class="section-sub center">O LIFE reúne informações dos dispositivos e apps que você já usa.</p>
+  </div>
+  <div class="int-row reveal">
+    <div class="int-chip">Garmin</div>
+    <div class="int-chip">WHOOP</div>
+    <div class="int-chip">Apple Health</div>
+    <div class="int-chip">Google Fit</div>
+    <div class="int-chip">Strava</div>
+    <div class="int-chip">Oura Ring</div>
+  </div>
+</section>
+
+<section class="section final-cta" id="acesso">
+  <div class="reveal">
+    <h2 class="section-head">Pronto para tratar sua vida como o maior projeto que você tem?</h2>
+    <p class="section-sub center">Estamos selecionando os primeiros usuários do LIFE. Deixe seu contato.</p>
+    <a href="mailto:contato@lifeprogressos.com" class="btn-primary">Entrar na lista</a>
+  </div>
+</section>
+
+<footer>
+  <p>LIFE — O Sistema Operacional da Sua Vida</p>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
