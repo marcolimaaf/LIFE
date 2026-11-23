@@ -292,7 +292,7 @@ footer a:hover{color:var(--teal)}
 
 <nav>
   <div class="nav-logo">LIFE</div>
-  <a href="#acesso" class="nav-cta">Acesso antecipado</a>
+  <a href="#acesso" class="nav-cta">R$ 19,90/mês</a>
 </nav>
 
 <section class="hero">
@@ -304,7 +304,7 @@ footer a:hover{color:var(--teal)}
     <div class="xp-bar"><div class="xp-fill"></div></div>
   </div>
   <div class="hero-actions">
-    <a href="#acesso" class="btn-primary">Quero participar</a>
+    <a href="#acesso" class="btn-primary">Começar — R$ 19,90/mês</a>
     <a href="#features" class="btn-ghost">Como funciona</a>
   </div>
 </section>
@@ -372,16 +372,18 @@ footer a:hover{color:var(--teal)}
 
 <section class="section final-cta" id="acesso">
   <div class="reveal">
-    <h2 class="section-head">Pronto para tratar sua vida como o maior projeto que você tem?</h2>
-    <p class="section-sub center">Estamos selecionando os primeiros usuários do LIFE. Deixe seu contato.</p>
+    <p style="font-family:'Space Grotesk',sans-serif;font-size:.85rem;color:var(--teal);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.4rem">Early Access</p>
+    <h2 class="section-head">Comece agora. R$&nbsp;19,90/mês.</h2>
+    <p style="font-size:.78rem;color:var(--slate);margin-bottom:.2rem">Preço de fundador — vagas limitadas.</p>
+    <p class="section-sub center" style="margin-top:.6rem">Preencha abaixo e receba o link de acesso e pagamento.</p>
     <form id="life-form" class="waitlist-form" action="https://formsubmit.co/marcolimaaf@gmail.com" method="POST">
-      <input type="hidden" name="_subject" value="LIFE — Novo interessado no acesso antecipado">
+      <input type="hidden" name="_subject" value="LIFE — Nova reserva Early Access (R$ 19,90)">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_next" value="https://marcolimaaf.github.io/LIFE/?enviado=1">
       <input type="hidden" name="_template" value="table">
       <input type="text" name="nome" placeholder="Seu nome" required>
       <input type="email" name="email" placeholder="Seu melhor e-mail" required>
-      <button type="submit">Entrar na lista</button>
+      <button type="submit">Garantir minha vaga</button>
     </form>
   </div>
 </section>
@@ -489,7 +491,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 if (window.location.search.includes('enviado=1')) {
   const form = document.getElementById('life-form');
   if (form) {
-    form.outerHTML = '<div class="form-success"><h3>🧬 Você está na lista!</h3><p>Vamos te avisar assim que o LIFE estiver pronto para os primeiros usuários.</p></div>';
+    form.outerHTML = '<div class="form-success"><h3>🧬 Vaga garantida!</h3><p>Vamos enviar o link de acesso e pagamento para o seu e-mail.</p></div>';
   }
 }
 
